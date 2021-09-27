@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    选择测试
+{% endblock %}
+
+{% block content %}
+    <p>
+        你的角色是(系统随机分配)：【{{ player.auto_role }}】
+        <br/>你的基础得分(按角色): {{ player.base_amount }}
+    </p>
+    <p>
+        {% formfield player.selected_id %}
+    </p>
+
+
+
+    {% next_button %}
+
+{% endblock %}

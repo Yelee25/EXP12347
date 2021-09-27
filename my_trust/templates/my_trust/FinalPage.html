@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    GAME OVER 游戏结束
+{% endblock %}
+
+{% block content %}
+你的所有轮次赢得的奖金列表：{{ player.participant.vars.hasWin }}
+    <p>
+        在你所有轮次赢得的人民币中，随机抽取其中一轮作为最终的奖励。
+        <br/>最终获得的奖励为：
+        <br/><span style="font-size:18pt;color:red;">{{ randombona }}元</span>
+    </p>
+
+
+{% endblock %}

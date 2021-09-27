@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    选择测试-玩家信息
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        {% formfield player.student_id %}<br/>
+        {% formfield player.student_collage %}<br/>
+        {% formfield player.student_age %}<br/>
+    </p>
+
+
+
+    {% next_button %}
+
+{% endblock %}

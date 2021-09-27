@@ -1,0 +1,138 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+{% block title %}
+{% if player.selected_id == 0 %}
+<span style="font-size:14pt;color:black;">本轮你没有参与任何排名，未获得任何奖励。下一轮 你依然可以继续参与游戏</span>
+{% else %}
+
+{% if player.selected_id == 1 %}
+
+{% if player.player_bonus_in_A > 50 %}
+<span style="font-size:14pt;color:red;">恭喜你！赢得优胜奖励：70元人民币</span>
+{% else %}
+<span style="font-size:14pt;color:red;">很遗憾！未赢得优胜奖励，只有参与奖励：20元人民币</span>
+{% endif %}
+
+
+{% else %}
+
+
+{% if player.player_bonus_in_B > 50 %}
+<span style="font-size:14pt;color:red;">恭喜你！赢得优胜奖励：70元人民币</span>
+{% else %}
+<span style="font-size:14pt;color:red;">很遗憾！未赢得优胜奖励，只有参与奖励：20元人民币</span>
+{% endif %}
+
+
+{% endif %}
+
+
+{% endif %}
+{% endblock %}
+
+
+
+
+{% block content %}
+{% if player.selected_id == 0 %}
+{% else %}
+
+<div style="width:90%;margin: 0 auto;height:400px">
+    <div style="float:left;width:50%;padding-left:20px;height:100%;">
+        <p>
+        你的编号：【{{ player.participant.vars.student_id }}】
+        <br/>
+        你在本轮中的角色：【{{ player.auto_role }}】
+        <br/>你的基础得分:&nbsp;&nbsp;{{ player.base_amount }}
+        <br/>你的选择的组别:&nbsp;&nbsp;
+        {% if player.selected_id == 1 %}
+        A
+        {% else %}
+        B
+        {% endif %}
+        <br/>你的选择得分:&nbsp;&nbsp;{{ player.selected_num }}<br/>
+
+
+            <div style="color:blue;">
+     你的总分：
+    {% if player.selected_id == 1 %}
+    {{ player.player_total_points_in_A }}
+    {% else %}
+    {{ player.player_total_points_in_B }}
+    {% endif %}
+        <br/>选择该组的所有参与者人数:&nbsp;&nbsp;
+        {% if player.selected_id == 1 %}
+        {{ group.total_selected_A }}
+        {% else %}
+        {{ group.total_selected_B }}
+        {% endif %}
+
+        {% if player.selected_id == 1 %}
+        <br/>在所有参与者中，你的总分排名为:&nbsp;&nbsp;{{ player.player_payoff_index_in_A }}
+        {% else %}
+        <br/>在所有参与者中，你的总分排名为:&nbsp;&nbsp;{{ player.player_payoff_index_in_B }}
+        {% endif %}
+        </div>
+
+
+    </p>
+    </div>
+    <div style="float:left;width:1px;height:80%;background-color:black;"></div>
+    <div style="float:left;padding-left:20px;height:100%;">
+
+          <p>
+        如果你选择:&nbsp;&nbsp;
+        {% if player.selected_id == 1 %}
+        B
+        {% else %}
+        A
+        {% endif %}
+        <br/>你的选择得分: &nbsp;&nbsp;{{ player.selected_num_temp }}<br/><br/><br/><br/>
+
+
+            <div style="color:blue;">
+     你的总分：
+    {% if player.selected_id == 1 %}
+    {{ player.player_total_points_in_B }}
+    {% else %}
+    {{ player.player_total_points_in_A }}
+    {% endif %}
+        <br/>选择该组的所有参与者人数:&nbsp;&nbsp;
+        {% if player.selected_id == 1 %}
+        {{ group.total_selected_B }} + 1
+        {% else %}
+        {{ group.total_selected_A }} + 1
+        {% endif %}
+
+        {% if player.selected_id == 1 %}
+        <br/>在所有参与者中，你的总分排名为:&nbsp;&nbsp;{{ player.player_payoff_index_in_B }}
+        <br/>{% if player.player_bonus_in_B > 0 %}并可以获得优胜奖励{% else %}并不能获得优胜奖励{% endif %}
+        {% else %}
+        <br/>在所有参与者中，你的总分排名为:&nbsp;&nbsp;{{ player.player_payoff_index_in_A }}
+        <br/>{% if player.player_bonus_in_A > 0 %}并可以获得优胜奖励{% else %}并不能获得优胜奖励{% endif %}
+        {% endif %}
+        </div>
+
+
+    </p>
+
+
+
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+{% endif %}
+{% next_button %}
+
+
+<p>
+    测试进度：现在是第 {{ player.player_round }} 轮
+
+</p>
+
+{% endblock %}
+
+

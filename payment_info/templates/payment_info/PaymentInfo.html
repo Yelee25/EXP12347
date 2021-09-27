@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Thank you for participating
+{% endblock %}
+
+{% block content %}
+    <div class="card card-body bg-light instructions">
+        <ul>
+        <li>
+            Your total payoff in both the interactive and non-interactive stages equals <b>{{ participant.payoff|floatformat:2 }}</b> points which is worth $<b>{{ eur|floatformat:2 }}</b>.
+        </li>
+        </ul>
+    </div>
+{% endblock %}
+
